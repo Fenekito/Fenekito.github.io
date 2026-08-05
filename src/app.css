@@ -1,0 +1,304 @@
+.container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 16px;
+}
+
+.card {
+	flex-grow: 1;
+	flex-shrink: 0;
+	flex-basis: auto;
+	width: fit-content;
+	height: auto;
+	background-image: linear-gradient(to bottom, rgba(100, 100, 100, 0.75), rgba(50, 50, 50, 0.75));
+	border: 4px solid grey;
+	backdrop-filter: blur(2px);
+	padding: 1rem;
+	padding-bottom: 0%;
+	margin-bottom: 0%;
+	border-color: black;
+	border-radius: 1rem;
+}
+
+.flex-item {
+	flex-basis: calc((100% - 1rem) / 2);
+}
+
+.unavailable {
+	cursor: not-allowed;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+span span {
+	text-transform: uppercase;
+	color: yellow;
+	font-size: 32px;
+}
+
+button {
+	background-color: rgb(75, 75, 75);
+	color: white;
+	width: fit-content;
+	height: auto;
+	border-color: white;
+	border-radius: 8px;
+	padding: 8px;
+	height: auto;
+	flex: 1 1 0;
+	transition: filter 0.1s ease;
+}
+
+button:hover {
+	filter: drop-shadow(1px 1px 8px rgba(255, 255, 255, 1));
+	cursor: pointer;
+}
+
+header {
+	color: white;
+	position: fixed;
+	z-index: 1000;
+	top: 85%;
+	width: 100%;
+}
+
+p {
+	color: white;
+	font-size: 24px;
+}
+
+dialog {
+	color: white;
+	width: 45%;
+	height: fit-content;
+	border-radius: 8px;
+	background-color: rgba(0, 0, 0, 0.2);
+	backdrop-filter: blur(8px) brightness(50%);
+	-webkit-backdrop-filter: blur(8px);
+	transform: scaleX(0);
+	transition:
+		opacity 0.25s ease-out,
+		transform 0.25s ease-out,
+		overlay 0.2s ease-out allow-discrete,
+		display 0.2s ease-out allow-discrete;
+}
+
+dialog:open {
+	opacity: 1;
+	transform: scaleX(1);
+}
+
+@starting-style {
+	dialog:open {
+		opacity: 0;
+		transform: scaleX(0);
+	}
+}
+
+/* Transition the :backdrop when the dialog modal is promoted to the top layer */
+dialog::backdrop {
+	background-color: transparent;
+	transition:
+		display 0.25s allow-discrete,
+		overlay 0.25s allow-discrete,
+		background-color 0.2s;
+}
+
+dialog:open::backdrop {
+	background-color: rgb(0 0 0 / 25%);
+}
+
+/* This starting-style rule cannot be nested inside the above selector
+because the nesting selector cannot represent pseudo-elements. */
+
+@starting-style {
+	dialog:open::backdrop {
+		background-color: transparent;
+	}
+}
+
+html,
+body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	font-family: 'Arial Black', Arial, sans-serif;
+	background-image: linear-gradient(to bottom, white, rgb(125, 125, 125));
+}
+
+nav a {
+	text-transform: uppercase;
+	font-size: 0.9rem;
+	letter-spacing: 0.08em;
+}
+
+.img-card {
+	flex: 1;
+	height: 400px;
+	padding-bottom: 0%;
+	border-radius: 1rem;
+	background-repeat: no-repeat;
+	background-position: 70% 30%;
+	background-size: cover;
+	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+	background-image: url('./lib/assets/Fenekito.png');
+}
+
+.img-card-sm {
+	width: auto;
+	max-height: 160px;
+	border-radius: 1rem;
+	padding: 8px;
+	filter: drop-shadow(4px 16px 8px rgba(0, 0, 0, 0.5));
+	transition:
+		transform 0.3s ease,
+		filter 0.1s ease,
+		rotate 0.1s ease;
+}
+
+.img-card-sm:hover {
+	transform: scale(1.1);
+	filter: drop-shadow(1px 1px 8px rgba(255, 255, 255, 1));
+	rotate: 2deg;
+}
+
+main {
+	gap: 20px;
+	display: flex;
+	padding: 5% 1rem 3rem;
+	padding-top: 1rem;
+	padding-bottom: 0%;
+	flex: 1;
+	background-color: rgba(0, 0, 0, 0.2);
+}
+
+h1,
+h2,
+h3 {
+	color: white;
+	text-transform: uppercase;
+	letter-spacing: 0.03em;
+}
+
+.card li {
+	display: list-item;
+	list-style-type: disc;
+	margin-top: 16px;
+}
+
+.card ul {
+	color: white;
+	list-style-type: disc;
+	padding-left: 4px;
+}
+
+/* Don't squeeze the images */
+.slide > img {
+	object-fit: cover;
+	object-position: 100% 0;
+}
+
+/* Scroll-Timeline supported, yay! Each image reads its own progress across the
+   carousel's scrollport and pans the other side of itself into view. */
+@supports (animation-timeline: view()) {
+	.slide > img {
+		animation: adjust-image linear both;
+		animation-timeline: view(x);
+	}
+}
+
+a {
+	color: yellow;
+	text-decoration: none;
+	transition: color 0.3s ease;
+}
+
+a:active {
+	color: orange;
+	transition: color 0.3s ease;
+}
+
+a:hover {
+	color: lightyellow;
+	text-shadow: 0 0 10px rgba(255, 255, 0, 0.7);
+}
+
+a:focus-visible {
+	outline: 2px solid yellow;
+	outline-offset: 2px;
+}
+
+nav a {
+	color: white;
+	text-decoration: none;
+	transition: color 0.3s ease;
+}
+
+nav a.active {
+	color: yellow;
+	text-decoration: none;
+	transition: color 0.3s ease;
+}
+
+.emphasis {
+	font-weight: bolder;
+	color: yellow;
+}
+
+.emphasis-br {
+	font-weight: bolder;
+	color: green;
+}
+
+.wavy {
+	animation-name: wavy;
+	animation-duration: 1.3s;
+	animation-timing-function: ease;
+	animation-iteration-count: infinite;
+	animation-delay: calc(var(--i) * 0.1s);
+	position: relative;
+	top: 0;
+	left: 0;
+}
+
+@media screen and (max-width: 600px) {
+	main {
+		padding: 50% 0.5rem 7.2rem 0.5rem;
+	}
+}
+
+@keyframes wavy {
+	0% {
+		top: 0px;
+	}
+	50% {
+		top: -15px;
+	}
+	100% {
+		top: 0px;
+	}
+}
+
+@keyframes adjust-image {
+	0% {
+		object-position: 100% 0;
+	}
+	100% {
+		object-position: 0 0;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	a {
+		transition: none;
+	}
+}
